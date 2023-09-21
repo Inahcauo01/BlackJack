@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Jeu {
@@ -7,8 +9,7 @@ public class Jeu {
     private List<List<Integer>> cartes;
 
 
-
-    // Construction de toutes les 52 cartes
+// Construction de toutes les 52 cartes
     public Jeu() {
         cartes = new ArrayList<>();
         for (int c=1; c<=4; c++){
@@ -18,12 +19,11 @@ public class Jeu {
                 carte.add(h);
                 carte.add(c);
                 cartes.add(carte);
-
             }
         }
     }
 
-    // Construction des cartes à partir d'une carte donnée
+// Construction des cartes à partir d'une carte donnée
     public Jeu(int hauteur, int couleur){
         cartes = new ArrayList<>();
         for (int c=couleur; c<=4; c++){
@@ -39,19 +39,24 @@ public class Jeu {
     }
 
     //public List<Carte> getCartes() {  //objet carte
-    public List<List<Integer>> getCartes() {
-        return cartes;
-    }
+    public List<List<Integer>> getCartes() { return cartes; }
 
-    public List<Object> recuperer_carte(int indice, List<List<Integer>> liste){
+
+    public List<Object> extraire_ieme_carte(int indice, List<List<Integer>> liste){
         List<Object> resultatListe = new ArrayList<>();
-
         if (indice >0 && indice <= liste.size()){
             resultatListe.add(liste.get(indice-1));
             liste.remove(indice-1);
             resultatListe.add(liste);
         }
-
         return resultatListe;
     }
+
+    public List<Object> tirer_une_carte(List<List<Integer>> liste){
+        List<Object> resultatListe = new ArrayList<>();
+        int nbRandom = new Random().nextInt(cartes.size()-1)+1;
+        resultatListe = extraire_ieme_carte(nbRandom, liste);
+        return resultatListe;
+    }
+
 }

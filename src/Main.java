@@ -1,18 +1,20 @@
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
-        Jeu jeu = new Jeu(10,4);
+        Jeu jeu = new Jeu(7,4);
 
         List<List<Integer>> cartes = jeu.getCartes();
 
-        cartes.stream().collect(Collectors.toList()).forEach(System.out::println);
+        cartes.stream().collect(Collectors.toList()).forEach(System.out::print);
 
-        List<Object> listeresult = jeu.recuperer_carte(2,cartes);
-        System.out.println("----------------\n Apres la recuperation : (indice 2)");
+        System.out.println("\n apres");
+        List<Object> listeresult = jeu.tirer_une_carte(cartes);
         listeresult.stream().collect(Collectors.toList()).forEach(System.out::println);
+
     }
 
 }
