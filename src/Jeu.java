@@ -78,5 +78,23 @@ public class Jeu {
         return resultatListe;
     }
 
+    public List<List<List<Integer>>> piocher_n_cartes(List<List<Integer>> liste){
+        List<List<List<Integer>>> resultatListe = new ArrayList<>();
+        List<List<Integer>> cartesAuDessus      = new ArrayList<>();
+        List<List<Integer>> cartesAuDesous      = new ArrayList<>();
+
+        int randVal = new Random().nextInt(liste.size()-3)+4;
+
+        for (int i=0; i< liste.size(); i++ ){
+            if (i < randVal){
+                cartesAuDessus.add(liste.get(i));
+            }else {
+                cartesAuDesous.add(liste.get(i));
+            }
+        }
+        resultatListe.add(cartesAuDessus);
+        resultatListe.add(cartesAuDesous);
+        return resultatListe;
+    }
 
 }
