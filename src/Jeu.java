@@ -4,6 +4,7 @@ import java.util.List;
 public class Jeu {
     private List<Carte> cartes;
 
+
     // Construction de toutes les 52 cartes
     public Jeu() {
         cartes = new ArrayList<>();
@@ -15,16 +16,18 @@ public class Jeu {
     }
 
     // Construction des cartes à partir d'une carte donnée
-    public Jeu(Carte carte){
+    public Jeu(int hauteur, int couleur){
         cartes = new ArrayList<>();
-        for (int c=carte.getCouleur(); c<=4; c++){
-            for (int h=1; h<=13; h++){
+        for (int c=couleur; c<=4; c++){
+            for (int h=hauteur; h<=13; h++){
                 cartes.add(new Carte(h, c));
             }
+            hauteur = 1;
         }
     }
 
-    public List<Carte> getCartes() {
+
+public List<Carte> getCartes() {
         return cartes;
     }
 }
