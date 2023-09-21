@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
@@ -54,9 +55,28 @@ public class Jeu {
 
     public List<Object> tirer_une_carte(List<List<Integer>> liste){
         List<Object> resultatListe = new ArrayList<>();
-        int nbRandom = new Random().nextInt(cartes.size()-1)+1;
+        int nbRandom = new Random().nextInt(liste.size())+1;
         resultatListe = extraire_ieme_carte(nbRandom, liste);
         return resultatListe;
     }
+
+
+    // Melanger les cartes
+    public List<List<Integer>> melanger_jeu_cartes(List<List<Integer>> liste){
+        List<List<Integer>> resultatListe = new ArrayList<>();
+        while(!liste.isEmpty()){
+            List<Object> carteTiree = tirer_une_carte(liste);
+            resultatListe.add((List<Integer>) carteTiree.get(0));
+            liste = (List<List<Integer>>) carteTiree.get(1);
+        }
+        return resultatListe;
+    }
+
+    public List<List<Integer>> melanger_jeu_cartes_shuffle(List<List<Integer>> liste){
+        List<List<Integer>> resultatListe = new ArrayList<>(liste);
+        Collections.shuffle(resultatListe);
+        return resultatListe;
+    }
+
 
 }

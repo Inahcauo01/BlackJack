@@ -10,10 +10,9 @@ public class Main {
         List<List<Integer>> cartes = jeu.getCartes();
 
         cartes.stream().collect(Collectors.toList()).forEach(System.out::print);
-
         System.out.println("\n apres");
-        List<Object> listeresult = jeu.tirer_une_carte(cartes);
-        listeresult.stream().collect(Collectors.toList()).forEach(System.out::println);
+        List<List<Integer>> listeresult = jeu.melanger_jeu_cartes_shuffle(cartes);
+        listeresult.stream().collect(Collectors.toList()).forEach(System.out::print);
 
     }
 
