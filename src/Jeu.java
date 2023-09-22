@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Jeu {
     //private List<Carte> cartes;     //objet carte
@@ -22,13 +23,14 @@ public class Jeu {
                 cartes.add(carte);
             }
         }
+
     }
 
 // Construction des cartes à partir d'une carte donnée
     public Jeu(int hauteur, int couleur){
         cartes = new ArrayList<>();
         for (int c=couleur; c<=4; c++){
-            for (int h=hauteur; h<=13; h++){
+            for (int h=hauteur+1; h<=13; h++){
                 //cartes.add(new Carte(h, c));  //objet carte
                 List<Integer> carte = new ArrayList<>();
                 carte.add(h);
@@ -95,6 +97,13 @@ public class Jeu {
         resultatListe.add(cartesAuDessus);
         resultatListe.add(cartesAuDesous);
         return resultatListe;
+    }
+
+    public List<List<Integer>> defausser_cartes(List<List<Integer>> cartesPioches, List<List<Integer>> cartesDefausser){
+        return  Stream.concat(cartesPioches.stream(), cartesDefausser.stream()).collect(Collectors.toList());
+//        List<List<Integer>> listeResultat = new ArrayList<>(cartesPioches);
+//        listeResultat.addAll(cartesDefausser);
+//        return listeResultat;
     }
 
 }
