@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,7 +56,7 @@ public class Jeu {
 
     public List<Object> tirer_une_carte(List<List<Integer>> liste){
         List<Object> resultatListe = new ArrayList<>();
-        int nbRandom = new Random().nextInt(liste.size())+1;
+        int nbRandom  = new Random().nextInt(liste.size())+1;
         resultatListe = extraire_ieme_carte(nbRandom, liste);
         return resultatListe;
     }
@@ -87,8 +86,8 @@ public class Jeu {
 
         int randVal = new Random().nextInt(liste.size()-3)+4;
 
-        for (int i=0; i< liste.size(); i++ ){
-            if (i < randVal){
+        for (int i=0; i< liste.size(); i++ ) {
+            if (i < randVal) {
                 cartesAuDessus.add(liste.get(i));
             }else {
                 cartesAuDesous.add(liste.get(i));
@@ -100,10 +99,10 @@ public class Jeu {
     }
 
     public List<List<Integer>> defausser_cartes(List<List<Integer>> cartesPioches, List<List<Integer>> cartesDefausser){
-        return  Stream.concat(cartesPioches.stream(), cartesDefausser.stream()).collect(Collectors.toList());
-//        List<List<Integer>> listeResultat = new ArrayList<>(cartesPioches);
-//        listeResultat.addAll(cartesDefausser);
-//        return listeResultat;
+//        return  Stream.concat(cartesPioches.stream(), cartesDefausser.stream()).collect(Collectors.toList());
+        List<List<Integer>> listeResultat = new ArrayList<>(cartesPioches);
+        listeResultat.addAll(cartesDefausser);
+        return listeResultat;
     }
 
 }
