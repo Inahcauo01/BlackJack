@@ -48,13 +48,23 @@ public class Partie {
         }
     }
 
-    public void calcul_total(List<List<Integer>> carteCalcul){
+    public int calcul_total(List<List<Integer>> carteCalcul){
         int total = 0;
+        int nbAce = 0;
         for (List<Integer> carte: carteCalcul) {
-            total += carte.get(0);
+            if(carte.get(0) > 10) {
+                total += 10;
+            } else if (carte.get(0)>1 && carte.get(0)<11){
+                total += carte.get(0);
+            } else if (carte.get(0) == 1){
+                total += 1;
+                nbAce++;
+            }
         }
-        System.out.println(total);
+        if (nbAce>0 && total<=11)
+            total +=10;
 
+        return total;
     }
 
 
