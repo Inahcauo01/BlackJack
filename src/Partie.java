@@ -35,6 +35,7 @@ public class Partie {
         cartesDealer.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
     }
 
+//    refactoring ############################
     public void hit_joueur(){
         List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
         if (!carte.isEmpty()){
@@ -48,6 +49,7 @@ public class Partie {
             cartesDealer.add(carte);
         }
     }
+//    refactoring ############################
 
     public int calcul_total(List<List<Integer>> carteCalcul){
         int total = 0;
@@ -106,7 +108,8 @@ public class Partie {
                         hit_delear();
                         totalDealer = calcul_total(cartesDealer);
                     }
-                    System.out.println("Total du dealer : " +totalJoueur);
+                    System.out.println("Cartes du dealer : "+cartesDealer);
+                    System.out.println("Total du dealer : " +totalDealer);
                     if (totalDealer > 21 || totalJoueur > totalDealer) {
                         System.out.println("Vous avez gagné !");
                     } else if (totalJoueur < totalDealer) {
