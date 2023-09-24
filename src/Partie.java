@@ -22,7 +22,6 @@ public class Partie {
                         jeu.melanger_jeu_cartes(cartesDeJeu)
                 ).get(0)
         );
-
     }
 
     public void demarrer(){
@@ -33,6 +32,28 @@ public class Partie {
         cartesJoueur.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
         cartesJoueur.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
         cartesDealer.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
+    }
+
+    public void hit_joueur(){
+        List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
+        if (!carte.isEmpty()){
+            cartesJoueur.add(carte);
+        }
+    }
+
+    public void hit_delear(){
+        List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
+        if (!carte.isEmpty()){
+            cartesDealer.add(carte);
+        }
+    }
+
+    public void calcul_total(List<List<Integer>> carteCalcul){
+        int total = 0;
+        for (List<Integer> carte: carteCalcul) {
+            total += carte.get(0);
+        }
+        System.out.println(total);
 
     }
 
