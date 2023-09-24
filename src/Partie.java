@@ -24,7 +24,7 @@ public class Partie {
         );
     }
 
-    public void demarrer(){
+    public void initialiser(){
         // vider les cartes du joueur et dealer
         cartesJoueur.clear();
         cartesDealer.clear();
@@ -63,9 +63,18 @@ public class Partie {
         }
         if (nbAce>0 && total<=11)
             total +=10;
-
         return total;
     }
 
+    public void demarrer(){
+        initialiser();
+        while (true){
+            System.out.println("Cartes du dealer : "+cartesDealer);
+            System.out.println("Cartes du joueur : "+cartesJoueur);
+            int total = calcul_total(cartesJoueur);
+            System.out.println("total : "+total);
+            break;
+        }
+    }
 
 }
