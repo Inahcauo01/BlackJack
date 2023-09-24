@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 
 public class Partie {
     private Jeu jeu;
@@ -70,10 +71,37 @@ public class Partie {
         initialiser();
         while (true){
             System.out.println("Cartes du dealer : "+cartesDealer);
-            System.out.println("Cartes du joueur : "+cartesJoueur);
-            int total = calcul_total(cartesJoueur);
-            System.out.println("total : "+total);
-            break;
+            System.out.println("Vos cartes : "+cartesJoueur);
+            int totalJoueur = calcul_total(cartesJoueur);
+            int totalDealer = calcul_total(cartesDealer);
+            System.out.println("Votre total : " +totalJoueur);
+            if (totalJoueur > 21) {
+                System.out.println("Bust! Vous avez perdu");
+                break;
+            }
+            System.out.println("Hit / Stand ? (h/s)");
+            Scanner scanner = new Scanner(System.in);
+            String choix    = scanner.nextLine();
+            if (choix.equalsIgnoreCase("h")){
+                hit_joueur();
+            }
+            
+
+//            if (totalJoueur == 21){
+//                while (totalDealer < 17) {
+//                    hit_delear();
+//                }
+//                System.out.println("Total du dealer : " +totalJoueur);
+//                if (totalDealer > 21 || totalJoueur > totalDealer) {
+//                    System.out.println("Vous avez gagné !");
+//                } else if (totalJoueur < totalDealer) {
+//                    System.out.println("Le dealer a gagné !");
+//                } else {
+//                    System.out.println("Push! Égalité");
+//                }
+//                break;
+//            }
+
         }
     }
 
