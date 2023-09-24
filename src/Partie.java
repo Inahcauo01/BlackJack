@@ -75,6 +75,7 @@ public class Partie {
             int totalJoueur = calcul_total(cartesJoueur);
             int totalDealer = calcul_total(cartesDealer);
             System.out.println("Votre total : " +totalJoueur);
+            System.out.println("Total du dealer : " +totalDealer);
             if (totalJoueur > 21) {
                 System.out.println("Bust! Vous avez perdu");
                 break;
@@ -84,23 +85,38 @@ public class Partie {
             String choix    = scanner.nextLine();
             if (choix.equalsIgnoreCase("h")){
                 hit_joueur();
+            }else {
+                // stand
+                if (totalJoueur == 21){
+                    while (totalDealer < 17) {
+                        hit_delear();
+                        totalDealer = calcul_total(cartesDealer);
+                    }
+                    System.out.println("Total du dealer : " +totalJoueur);
+                    if (totalDealer > 21 || totalJoueur > totalDealer) {
+                        System.out.println("Vous avez gagné !");
+                    } else if (totalJoueur < totalDealer) {
+                        System.out.println("Le dealer a gagné !");
+                    } else {
+                        System.out.println("Push! Égalité");
+                    }
+                    break;
+                }else if (totalJoueur < 21){
+                    while (totalDealer < 17) {
+                        hit_delear();
+                        totalDealer = calcul_total(cartesDealer);
+                    }
+                    System.out.println("Total du dealer : " +totalJoueur);
+                    if (totalDealer > 21 || totalJoueur > totalDealer) {
+                        System.out.println("Vous avez gagné !");
+                    } else if (totalJoueur < totalDealer) {
+                        System.out.println("Le dealer a gagné !");
+                    } else {
+                        System.out.println("Push! Égalité");
+                    }
+                    break;
+                }
             }
-            
-
-//            if (totalJoueur == 21){
-//                while (totalDealer < 17) {
-//                    hit_delear();
-//                }
-//                System.out.println("Total du dealer : " +totalJoueur);
-//                if (totalDealer > 21 || totalJoueur > totalDealer) {
-//                    System.out.println("Vous avez gagné !");
-//                } else if (totalJoueur < totalDealer) {
-//                    System.out.println("Le dealer a gagné !");
-//                } else {
-//                    System.out.println("Push! Égalité");
-//                }
-//                break;
-//            }
 
         }
     }
