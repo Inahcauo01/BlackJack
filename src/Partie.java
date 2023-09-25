@@ -8,10 +8,8 @@ public class Partie {
     private List<List<Integer>> cartesJoueur;
     private List<List<Integer>> cartesDealer;
     private List<List<Integer>> cartesDeJeu;
+    private int scroreJoueur;
 
-    public List<List<Integer>> getCartesDeJeu() {
-        return cartesDeJeu;
-    }
 
     public Partie() {
         jeu = new Jeu();
@@ -23,6 +21,9 @@ public class Partie {
                         jeu.melanger_jeu_cartes(cartesDeJeu)
                 ).get(0)
         );
+        scroreJoueur = 0;
+        System.out.println("Entrer votre montatnt total ");
+        Scanner scanner = new Scanner(System.in);
     }
 
     public void initialiser(){
@@ -61,12 +62,9 @@ public class Partie {
     }
 
     public void demarrer() {
-        System.out.println("Cartes de jeu : "+cartesDeJeu);
         initialiser();
 
         while (true) {
-            System.out.println("Cartes de jeu : "+cartesDeJeu);
-            System.out.println("nb cartes : " + cartesDeJeu.size());
             System.out.println("Cartes du dealer : " + cartesDealer);
             System.out.println("Vos cartes       : " + cartesJoueur);
 
@@ -109,16 +107,21 @@ public class Partie {
     }
 
     private void afficherResultat(int totalJoueur, int totalDealer) {
+        Scanner scanner = new Scanner(System.in);
         if (totalDealer > 21 || totalJoueur > totalDealer) {
-            System.out.println("\n**************** Vous avez gagné ! ****************");
-            demarrer();
+            System.out.println("\n**************** Vous avez gagné ! ****************\n");
+//            scroreJoueur *= 2;
         } else if (totalJoueur < totalDealer) {
-            System.out.println("\n**************** Vous avez perdu ! ****************");
-            demarrer();
+            System.out.println("\n**************** Vous avez perdu ! ****************\n");
+//            scoreJoueur
         } else {
-            System.out.println("\n***************** Push! Égalité ******************");
-            demarrer();
+            System.out.println("\n***************** Push! Égalité ******************\n");
         }
+        System.out.println("Voulez vous rejouer ? (O/N)");
+        String choix = scanner.nextLine();
+        if (choix.equalsIgnoreCase("o"))
+            demarrer();
+
     }
 
 }
