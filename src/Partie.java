@@ -60,67 +60,12 @@ public class Partie {
         return total;
     }
 
-//    public void demarrer(){
-//        initialiser();
-//        while (true){
-////            System.out.println("Les cartes de jeu : "+ cartesDeJeu);
-//            System.out.println("nb cartes : "+ cartesDeJeu.size());
-//            System.out.println("Cartes du dealer : "+cartesDealer);
-//            System.out.println("Vos cartes : "+cartesJoueur);
-//            int totalJoueur = calcul_total(cartesJoueur);
-//            int totalDealer = calcul_total(cartesDealer);
-//            System.out.println("Votre total : " +totalJoueur);
-////            System.out.println("Total du dealer : " +totalDealer);
-//            if (totalJoueur > 21) {
-//                System.out.println("\n**************** Bust! Vous avez perdu ****************");
-//                break;
-//            }
-//            System.out.println("Hit / Stand ? (h/s)");
-//            Scanner scanner = new Scanner(System.in);
-//            String choix    = scanner.nextLine();
-//            if (choix.equalsIgnoreCase("h")){
-//                hit_carte(cartesJoueur);
-//            }
-//            else {
-//                // stand
-//                if (totalJoueur == 21){
-//                    while (totalDealer < 17) {
-//                        hit_carte(cartesDealer);
-//                        totalDealer = calcul_total(cartesDealer);
-//                    }
-//                    System.out.println("Total du dealer : " +totalDealer);
-//                    if (totalDealer > 21 || totalJoueur > totalDealer) {
-//                        System.out.println("\n**************** Vous avez gagné ! ****************");
-//                    } else if (totalJoueur < totalDealer) {
-//                        System.out.println("\n**************** Vous avez perdu ! **************");
-//                    } else {
-//                        System.out.println("\n**************** Push! Égalité **************");
-//                    }
-//                    break;
-//                }else if (totalJoueur < 21){
-//                    while (totalDealer < 17) {
-//                        hit_carte(cartesDealer);
-//                        totalDealer = calcul_total(cartesDealer);
-//                    }
-//                    System.out.println("Cartes du dealer : "+cartesDealer);
-//                    System.out.println("Total du dealer : " +totalDealer);
-//                    if (totalDealer > 21 || totalJoueur > totalDealer) {
-//                        System.out.println("\n**************** Vous avez gagné ! **************");
-//                    } else if (totalJoueur < totalDealer) {
-//                        System.out.println("\n**************** Vous avez perdu ! **************");
-//                    } else {
-//                        System.out.println("\n**************** Push! Égalité **************** ");
-//                    }
-//                    break;
-//                }
-//            }
-//        }
-//    }
-
     public void demarrer() {
+        System.out.println("Cartes de jeu : "+cartesDeJeu);
         initialiser();
 
         while (true) {
+            System.out.println("Cartes de jeu : "+cartesDeJeu);
             System.out.println("nb cartes : " + cartesDeJeu.size());
             System.out.println("Cartes du dealer : " + cartesDealer);
             System.out.println("Vos cartes       : " + cartesJoueur);
@@ -132,6 +77,7 @@ public class Partie {
 
             if (totalJoueur > 21) {
                 System.out.println("\n**************** Bust! Vous avez perdu ****************");
+                demarrer();
                 break;
             }
 
@@ -165,10 +111,13 @@ public class Partie {
     private void afficherResultat(int totalJoueur, int totalDealer) {
         if (totalDealer > 21 || totalJoueur > totalDealer) {
             System.out.println("\n**************** Vous avez gagné ! ****************");
+            demarrer();
         } else if (totalJoueur < totalDealer) {
             System.out.println("\n**************** Vous avez perdu ! ****************");
+            demarrer();
         } else {
             System.out.println("\n***************** Push! Égalité ******************");
+            demarrer();
         }
     }
 
