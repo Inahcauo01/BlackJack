@@ -35,21 +35,12 @@ public class Partie {
         cartesDealer.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
     }
 
-//    refactoring ############################
-    public void hit_joueur(){
+    public void hit_carte(List<List<Integer>> liste){
         List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
         if (!carte.isEmpty()){
-            cartesJoueur.add(carte);
+            liste.add(carte);
         }
     }
-
-    public void hit_delear(){
-        List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
-        if (!carte.isEmpty()){
-            cartesDealer.add(carte);
-        }
-    }
-//    refactoring ############################
 
     public int calcul_total(List<List<Integer>> carteCalcul){
         int total = 0;
@@ -72,50 +63,51 @@ public class Partie {
     public void demarrer(){
         initialiser();
         while (true){
+            System.out.println("Les cartes de jeu : "+ cartesDeJeu);
             System.out.println("Cartes du dealer : "+cartesDealer);
             System.out.println("Vos cartes : "+cartesJoueur);
             int totalJoueur = calcul_total(cartesJoueur);
             int totalDealer = calcul_total(cartesDealer);
             System.out.println("Votre total : " +totalJoueur);
-            System.out.println("Total du dealer : " +totalDealer);
+//            System.out.println("Total du dealer : " +totalDealer);
             if (totalJoueur > 21) {
-                System.out.println("Bust! Vous avez perdu");
+                System.out.println("\n**************** Bust! Vous avez perdu ****************");
                 break;
             }
             System.out.println("Hit / Stand ? (h/s)");
             Scanner scanner = new Scanner(System.in);
             String choix    = scanner.nextLine();
             if (choix.equalsIgnoreCase("h")){
-                hit_joueur();
+                hit_carte(cartesJoueur);
             }else {
                 // stand
                 if (totalJoueur == 21){
                     while (totalDealer < 17) {
-                        hit_delear();
+                        hit_carte(cartesDealer);
                         totalDealer = calcul_total(cartesDealer);
                     }
-                    System.out.println("Total du dealer : " +totalJoueur);
+                    System.out.println("Total du dealer : " +totalDealer);
                     if (totalDealer > 21 || totalJoueur > totalDealer) {
-                        System.out.println("Vous avez gagné !");
+                        System.out.println("\n**************** Vous avez gagné ! ****************");
                     } else if (totalJoueur < totalDealer) {
-                        System.out.println("Le dealer a gagné !");
+                        System.out.println("\n**************** Vous avez perdu ! **************");
                     } else {
                         System.out.println("Push! Égalité");
                     }
                     break;
                 }else if (totalJoueur < 21){
                     while (totalDealer < 17) {
-                        hit_delear();
+                        hit_carte(cartesDealer);
                         totalDealer = calcul_total(cartesDealer);
                     }
                     System.out.println("Cartes du dealer : "+cartesDealer);
                     System.out.println("Total du dealer : " +totalDealer);
                     if (totalDealer > 21 || totalJoueur > totalDealer) {
-                        System.out.println("Vous avez gagné !");
+                        System.out.println("\n**************** Vous avez gagné ! **************");
                     } else if (totalJoueur < totalDealer) {
-                        System.out.println("Le dealer a gagné !");
+                        System.out.println("\n**************** Vous avez perdu ! **************");
                     } else {
-                        System.out.println("Push! Égalité");
+                        System.out.println("\n**************** Push! Égalité **************** ");
                     }
                     break;
                 }
