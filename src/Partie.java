@@ -8,7 +8,8 @@ public class Partie {
     private List<List<Integer>> cartesJoueur;
     private List<List<Integer>> cartesDealer;
     private List<List<Integer>> cartesDeJeu;
-    private int scroreJoueur;
+    private int montantTotal;
+    private int mise;
 
 
     public Partie() {
@@ -21,9 +22,10 @@ public class Partie {
                         jeu.melanger_jeu_cartes(cartesDeJeu)
                 ).get(0)
         );
-        scroreJoueur = 0;
         System.out.println("Entrer votre montatnt total ");
         Scanner scanner = new Scanner(System.in);
+        montantTotal    = scanner.nextInt();
+        mise = 0;
     }
 
     public void initialiser(){
@@ -34,9 +36,14 @@ public class Partie {
         cartesJoueur.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
         cartesJoueur.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
         cartesDealer.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
+        // choisir votre mise
+        choisirMise();
     }
 
     public void hit_carte(List<List<Integer>> liste){
+        if (cartesDeJeu.isEmpty()){
+            //refaire la partie avec meme score
+        }
         List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
         if (!carte.isEmpty()){
             liste.add(carte);
@@ -63,7 +70,6 @@ public class Partie {
 
     public void demarrer() {
         initialiser();
-
         while (true) {
             System.out.println("Cartes du dealer : " + cartesDealer);
             System.out.println("Vos cartes       : " + cartesJoueur);
@@ -110,17 +116,52 @@ public class Partie {
         Scanner scanner = new Scanner(System.in);
         if (totalDealer > 21 || totalJoueur > totalDealer) {
             System.out.println("\n**************** Vous avez gagné ! ****************\n");
-//            scroreJoueur *= 2;
+            montantTotal += mise;
         } else if (totalJoueur < totalDealer) {
             System.out.println("\n**************** Vous avez perdu ! ****************\n");
-//            scoreJoueur
+            montantTotal -= mise;
         } else {
             System.out.println("\n***************** Push! Égalité ******************\n");
         }
+        System.out.println("Votre mantant total : "+ montantTotal);
         System.out.println("Voulez vous rejouer ? (O/N)");
         String choix = scanner.nextLine();
         if (choix.equalsIgnoreCase("o"))
             demarrer();
+    }
+
+    private void choisirMise(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choisissez votre mise :");
+        System.out.println("1. 10 jetons ");
+        System.out.println("2. 20 jetons ");
+        System.out.println("3. 50 jetons ");
+        System.out.println("4. 100 jetons ");
+        System.out.println("5. 500 jetons ");
+
+        int choixMise = scanner.nextInt();
+
+        switch (choixMise) {
+            case 1:
+                mise = 10;
+                break;
+            case 2:
+                mise = 20;
+                break;
+            case 3:
+                mise = 50;
+                break;
+            case 4:
+                mise = 100;
+                break;
+            case 5:
+                mise = 500;
+                break;
+            default:
+                System.out.println("Choix de mise invalide. La mise par défaut sera de 10 jetons.");
+                mise = 10;
+                break;
+        }
 
     }
 
