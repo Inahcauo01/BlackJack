@@ -138,6 +138,7 @@ public class Partie {
         System.out.println("3. 50 jetons ");
         System.out.println("4. 100 jetons ");
         System.out.println("5. 500 jetons ");
+        System.out.println("6. X2 jetons ");
 
         int choixMise = scanner.nextInt();
 
@@ -156,6 +157,9 @@ public class Partie {
                 break;
             case 5:
                 mise = 500;
+                break;
+            case 6:
+                mise = montantTotal*2;
                 break;
             default:
                 System.out.println("Choix de mise invalide. La mise par défaut sera de 10 jetons.");
