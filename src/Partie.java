@@ -43,6 +43,8 @@ public class Partie {
     public void hit_carte(List<List<Integer>> liste){
         if (cartesDeJeu.isEmpty()){
             //refaire la partie avec meme score
+            System.out.println("Il faut refausser les cartes a nouveau");
+            return;
         }
         List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
         if (!carte.isEmpty()){
@@ -81,6 +83,8 @@ public class Partie {
 
             if (totalJoueur > 21) {
                 System.out.println("\n**************** Bust! Vous avez perdu ****************");
+                montantTotal -= mise;
+                System.out.println("Votre mantant total : "+ montantTotal);
                 demarrer();
                 break;
             }

@@ -67,7 +67,7 @@ public class Jeu {
         List<List<Integer>> resultatListe = new ArrayList<>();
         while(!liste.isEmpty()){
             List<Object> carteTiree = tirer_une_carte(liste);
-            resultatListe.add((List<Integer>) carteTiree.get(0));
+            resultatListe.add(0,(List<Integer>) carteTiree.get(0));
             liste = (List<List<Integer>>) carteTiree.get(1);
         }
         return resultatListe;
