@@ -24,7 +24,17 @@ public class Partie {
         );
         System.out.println("Entrer votre montatnt total ");
         Scanner scanner = new Scanner(System.in);
-        montantTotal    = scanner.nextInt();
+//        validation
+        do {
+            System.out.print("Enter a number: ");
+            try {
+                montantTotal = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                scanner.nextLine();
+                System.out.println("Veuiller entrer une correcte valeur !");
+            }
+        } while (true);
         mise = 0;
     }
 
@@ -153,7 +163,13 @@ public class Partie {
             System.out.println("5. 500 jetons ");
             System.out.println("6. X2 jetons ");
 
-            int choixMise = scanner.nextInt();
+            int choixMise;
+            try {
+                choixMise = scanner.nextInt();
+            }catch (Exception e){
+                System.out.println("La mise par défaut sera de 10 jetons");
+                choixMise = 1;
+            }
 
             switch (choixMise) {
                 case 1:
@@ -179,7 +195,7 @@ public class Partie {
                     mise = 10;
                     break;
             }
-        }while(mise > montantTotal);
+        }while(mise >= montantTotal);
 
     }
 
