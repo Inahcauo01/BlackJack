@@ -44,6 +44,7 @@ public class Partie {
         if (cartesDeJeu.isEmpty()){
             //refaire la partie avec meme score
             System.out.println("Il faut refausser les cartes a nouveau");
+//            melangerEtRemplirCartesDeJeu();
             return;
         }
         List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
@@ -51,6 +52,9 @@ public class Partie {
             liste.add(carte);
         }
     }
+//    private void melangerEtRemplirCartesDeJeu() {
+//        cartesDeJeu = jeu.melanger_jeu_cartes(jeu.getCartes());
+//    }
 
     public int calcul_total(List<List<Integer>> carteCalcul){
         int total = 0;
@@ -127,6 +131,10 @@ public class Partie {
         } else {
             System.out.println("\n***************** Push! Égalité ******************\n");
         }
+        if (montantTotal <= 0){
+            System.out.println("Votre montant total est epuisé");
+            System.exit(0);
+        }
         System.out.println("Votre mantant total : "+ montantTotal);
         System.out.println("Voulez vous rejouer ? (O/N)");
         String choix = scanner.nextLine();
@@ -136,40 +144,42 @@ public class Partie {
 
     private void choisirMise(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choisissez votre mise :");
-        System.out.println("1. 10 jetons ");
-        System.out.println("2. 20 jetons ");
-        System.out.println("3. 50 jetons ");
-        System.out.println("4. 100 jetons ");
-        System.out.println("5. 500 jetons ");
-        System.out.println("6. X2 jetons ");
+        do{
+            System.out.println("Choisissez votre mise :");
+            System.out.println("1. 10 jetons ");
+            System.out.println("2. 20 jetons ");
+            System.out.println("3. 50 jetons ");
+            System.out.println("4. 100 jetons ");
+            System.out.println("5. 500 jetons ");
+            System.out.println("6. X2 jetons ");
 
-        int choixMise = scanner.nextInt();
+            int choixMise = scanner.nextInt();
 
-        switch (choixMise) {
-            case 1:
-                mise = 10;
-                break;
-            case 2:
-                mise = 20;
-                break;
-            case 3:
-                mise = 50;
-                break;
-            case 4:
-                mise = 100;
-                break;
-            case 5:
-                mise = 500;
-                break;
-            case 6:
-                mise = montantTotal*2;
-                break;
-            default:
-                System.out.println("Choix de mise invalide. La mise par défaut sera de 10 jetons.");
-                mise = 10;
-                break;
-        }
+            switch (choixMise) {
+                case 1:
+                    mise = 10;
+                    break;
+                case 2:
+                    mise = 20;
+                    break;
+                case 3:
+                    mise = 50;
+                    break;
+                case 4:
+                    mise = 100;
+                    break;
+                case 5:
+                    mise = 500;
+                    break;
+                case 6:
+                    mise = montantTotal*2;
+                    break;
+                default:
+                    System.out.println("Choix de mise invalide. La mise par défaut sera de 10 jetons.");
+                    mise = 10;
+                    break;
+            }
+        }while(mise > montantTotal);
 
     }
 

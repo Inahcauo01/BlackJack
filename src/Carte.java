@@ -1,8 +1,8 @@
 public class Carte {
     private final int hauteur;
-    private final int couleur;
+    private final Couleur couleur;
 
-    public Carte(int hauteur, int couleur) {
+    public Carte(int hauteur, Couleur couleur) {
         this.hauteur = hauteur;
         this.couleur = couleur;
     }
