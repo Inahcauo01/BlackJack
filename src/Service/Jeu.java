@@ -49,7 +49,7 @@ public class Jeu {
 
     public List<Object> tirer_une_carte(List<Carte> liste){
         List<Object> resultatListe;
-        int nbRandom  = new Random().nextInt(liste.size())+1;
+        int nbRandom = new Random().nextInt(liste.size())+1;
         resultatListe = extraire_ieme_carte(nbRandom, liste);
         return resultatListe;
     }

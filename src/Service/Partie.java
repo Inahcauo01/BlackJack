@@ -46,17 +46,19 @@ public class Partie {
         cartesJoueur.clear();
         cartesDealer.clear();
         // et les remplire
+        if (cartesDeJeu.size() <= 3)
+            initialiserCartesDeJeu();
         cartesJoueur.add((Carte) jeu.tirer_une_carte(cartesDeJeu).get(0));
         cartesJoueur.add((Carte) jeu.tirer_une_carte(cartesDeJeu).get(0));
         cartesDealer.add((Carte) jeu.tirer_une_carte(cartesDeJeu).get(0));
         // choisir votre mise
+        System.out.println("size :"+cartesDeJeu.size());
         choisirMise();
     }
 
     public void hit_carte(List<Carte> liste){
         if (cartesDeJeu.isEmpty()){ //refaire la partie avec meme score
-            System.out.println("Il faut refausser les cartes a nouveau");
-            return;
+            initialiserCartesDeJeu();
         }
         Carte carte = (Carte) jeu.tirer_une_carte(cartesDeJeu).get(0);
         if (carte != null){
@@ -150,6 +152,7 @@ public class Partie {
             System.out.println("Votre montant total est epuisé");
             System.exit(0);
         }
+        System.out.println("size :"+cartesDeJeu.size());
         System.out.println("Votre mantant total : "+ montantTotal);
         System.out.println("Voulez vous rejouer ? (O/N)");
         String choix = scanner.nextLine();
@@ -204,4 +207,13 @@ public class Partie {
 
     }
 
+    private void initialiserCartesDeJeu() {
+        // Créer les cartes, les mélanger et les piocher
+        jeu = new Jeu();
+        cartesDeJeu.addAll(
+                jeu.piocher_n_cartes(
+                        jeu.melanger_jeu_cartes(jeu.getCartes())
+                ).get(0)
+        );
+    }
 }
