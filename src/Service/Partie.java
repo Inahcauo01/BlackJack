@@ -99,7 +99,12 @@ public class Partie {
                 System.out.println("\n**************** Bust! Vous avez perdu ****************");
                 montantTotal -= mise;
                 System.out.println("Votre mantant total : "+ montantTotal);
-                demarrer();
+
+                System.out.println("Voulez vous rejouer ? (O/N)");
+                Scanner scanner = new Scanner(System.in);
+                String choix = scanner.nextLine();
+                if (choix.equalsIgnoreCase("o"))
+                    demarrer();
                 break;
             }
 
@@ -188,7 +193,7 @@ public class Partie {
                     mise = 500;
                     break;
                 case 6:
-                    mise = (montantTotal*2);
+                    mise = montantTotal;
                     break;
                 default:
                     System.out.println("Choix de mise invalide. La mise par défaut sera de 10 jetons.");
