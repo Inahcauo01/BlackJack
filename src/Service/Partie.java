@@ -1,13 +1,17 @@
+package Service;
+
+import Domaine.Carte;
+import Service.Jeu;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 public class Partie {
     private Jeu jeu;
-    private List<List<Integer>> cartesJoueur;
-    private List<List<Integer>> cartesDealer;
-    private List<List<Integer>> cartesDeJeu;
+    private List<Carte> cartesJoueur;
+    private List<Carte> cartesDealer;
+    private List<Carte> cartesDeJeu;
     private int montantTotal;
     private int mise;
 
@@ -22,11 +26,10 @@ public class Partie {
                         jeu.melanger_jeu_cartes(cartesDeJeu)
                 ).get(0)
         );
-        System.out.println("Entrer votre montatnt total ");
+
         Scanner scanner = new Scanner(System.in);
-//        validation
         do {
-            System.out.print("Enter a number: ");
+            System.out.println("Entrer votre montatnt total ");
             try {
                 montantTotal = scanner.nextInt();
                 break;
@@ -43,44 +46,41 @@ public class Partie {
         cartesJoueur.clear();
         cartesDealer.clear();
         // et les remplire
-        cartesJoueur.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
-        cartesJoueur.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
-        cartesDealer.add((List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0));
+        cartesJoueur.add((Carte) jeu.tirer_une_carte(cartesDeJeu).get(0));
+        cartesJoueur.add((Carte) jeu.tirer_une_carte(cartesDeJeu).get(0));
+        cartesDealer.add((Carte) jeu.tirer_une_carte(cartesDeJeu).get(0));
         // choisir votre mise
         choisirMise();
     }
 
-    public void hit_carte(List<List<Integer>> liste){
-        if (cartesDeJeu.isEmpty()){
-            //refaire la partie avec meme score
+    public void hit_carte(List<Carte> liste){
+        if (cartesDeJeu.isEmpty()){ //refaire la partie avec meme score
             System.out.println("Il faut refausser les cartes a nouveau");
-//            melangerEtRemplirCartesDeJeu();
             return;
         }
-        List<Integer> carte = (List<Integer>) jeu.tirer_une_carte(cartesDeJeu).get(0);
-        if (!carte.isEmpty()){
+        Carte carte = (Carte) jeu.tirer_une_carte(cartesDeJeu).get(0);
+        if (carte != null){
             liste.add(carte);
         }
     }
-//    private void melangerEtRemplirCartesDeJeu() {
-//        cartesDeJeu = jeu.melanger_jeu_cartes(jeu.getCartes());
-//    }
 
-    public int calcul_total(List<List<Integer>> carteCalcul){
+    public int calcul_total(List<Carte> carteCalcul){
         int total = 0;
         int nbAce = 0;
-        for (List<Integer> carte: carteCalcul) {
-            if(carte.get(0) > 10) {
+
+        for (Carte carte: carteCalcul) {
+            if(carte.getHauteur() > 10)
                 total += 10;
-            } else if (carte.get(0)>1 && carte.get(0)<11){
-                total += carte.get(0);
-            } else if (carte.get(0) == 1){
+            else if (carte.getHauteur() >1 && carte.getHauteur() <11)
+                total += carte.getHauteur();
+            else if (carte.getHauteur() == 1){
                 total += 1;
                 nbAce++;
             }
         }
         if (nbAce>0 && total<=11)
             total +=10;
+
         return total;
     }
 
@@ -188,14 +188,14 @@ public class Partie {
                     mise = 500;
                     break;
                 case 6:
-                    mise = montantTotal*2;
+                    mise = (montantTotal*2);
                     break;
                 default:
                     System.out.println("Choix de mise invalide. La mise par défaut sera de 10 jetons.");
                     mise = 10;
                     break;
             }
-        }while(mise >= montantTotal);
+        }while(mise > montantTotal);
 
     }
 
